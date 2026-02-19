@@ -21,10 +21,11 @@
 
 ## Installation
 
-### Step 1: Install the plugin
+### Step 1: Add marketplace and install
 
 ```
-/plugin install aesirsystems/claude-workflow-tools
+/plugin marketplace add aesirsystems/claude-marketplace
+/plugin install workflow-tools@aesir-marketplace
 ```
 
 ### Step 2: Configure the statusline

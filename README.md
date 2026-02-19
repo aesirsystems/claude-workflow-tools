@@ -16,7 +16,8 @@ Claude Code plugin for context preservation across compactions and an enhanced s
 ## Install
 
 ```
-/plugin install aesirsystems/claude-workflow-tools
+/plugin marketplace add aesirsystems/claude-marketplace
+/plugin install workflow-tools@aesir-marketplace
 ```
 
 ## Setup
