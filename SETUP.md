@@ -5,11 +5,6 @@
 ### Required
 
 - **Claude Code** — [install guide](https://docs.anthropic.com/en/docs/claude-code)
-- **jq** — JSON parser used by the statusline
-  ```bash
-  brew install jq        # macOS
-  sudo apt install jq    # Debian/Ubuntu
-  ```
 
 ### Optional
 
@@ -25,30 +20,10 @@
 
 ```
 /plugin marketplace add aesirsystems/claude-marketplace
-/plugin install workflow-tools@aesir-marketplace
+/plugin install breadcrumbs@aesir-marketplace
 ```
 
-### Step 2: Configure the statusline
-
-Run the setup skill:
-
-```
-/workflow-tools:setup-statusline
-```
-
-Or manually add to `~/.claude/settings.json`:
-
-```json
-{
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/plugins/cache/workflow-tools@aesirsystems/claude-workflow-tools/bin/statusline.sh",
-    "padding": 0
-  }
-}
-```
-
-### Step 3: Add recommended permissions
+### Step 2: Add recommended permissions
 
 The skills request permissions at runtime, but for a smoother experience add these to `~/.claude/settings.json` under `permissions.allow`:
 
@@ -70,26 +45,7 @@ The skills request permissions at runtime, but for a smoother experience add the
 }
 ```
 
-## Configuration
-
-### Statusline
-
-The statusline displays automatically after setup. No configuration needed beyond the `statusLine` entry in settings.
-
-**What each segment shows:**
-
-| Segment | Example | Description |
-|---------|---------|-------------|
-| Model | `Opus 4.6 (1M context) 1000k` | Model name and context window size |
-| EXT | `EXT` | Extended context (>200k) indicator |
-| Auth | `Sub` or `API` | Authentication method |
-| Location | `main ~3` or `~/github/project` | Git branch + dirty files, or path when outside git |
-| Context bar | `▓▓▓░░░░░░░ 28%` | Green <50%, yellow 50-79%, red 80%+ |
-| Duration | `12m30s` | Session time (appears after 1 minute) |
-| Churn | `+45/-12` | Lines added/removed (appears after first edit) |
-| Warning | `/compact` | Red banner at 85%+ context usage |
-
-### Hooks
+## Hooks
 
 Hooks activate automatically when the plugin is enabled:
 
@@ -98,13 +54,12 @@ Hooks activate automatically when the plugin is enabled:
 
 These only run in projects with a `.beads/` directory. In non-beads projects, they exit silently.
 
-### Skills
+## Skills
 
 | Skill | Invoke with | When to use |
 |-------|-------------|-------------|
-| prepare-compact | `/workflow-tools:prepare-compact` | Before `/compact` — saves complete strategic context |
-| restore-context | `/workflow-tools:restore-context` | After `/compact` or new session — reloads everything |
-| setup-statusline | `/workflow-tools:setup-statusline` | One-time setup after installation |
+| prepare-compact | `/breadcrumbs:prepare-compact` | Before `/compact` — saves complete strategic context |
+| restore-context | `/breadcrumbs:restore-context` | After `/compact` or new session — reloads everything |
 
 ## Using without beads
 
@@ -119,31 +74,20 @@ Recovery files are written to `.beads/` if it exists, otherwise to the project r
 ## Updating
 
 ```
-/plugin update workflow-tools@aesirsystems/claude-workflow-tools
+/plugin update breadcrumbs@aesir-marketplace
 ```
 
 ## Uninstalling
 
 ```
-/plugin uninstall workflow-tools@aesirsystems/claude-workflow-tools
+/plugin uninstall breadcrumbs@aesir-marketplace
 ```
 
-Remove the `statusLine` entry from `~/.claude/settings.json` if you added it manually.
-
 ## Troubleshooting
-
-### Statusline shows nothing
-- Check jq is installed: `which jq`
-- Check the script is executable: `ls -la ~/.claude/plugins/cache/workflow-tools@aesirsystems/claude-workflow-tools/bin/statusline.sh`
-- Run manually to test: `echo '{}' | ~/.claude/plugins/cache/workflow-tools@aesirsystems/claude-workflow-tools/bin/statusline.sh`
-
-### Statusline shows full path instead of ~/...
-- Verify `$HOME` is set in your shell: `echo $HOME`
-- The script uses `sed` substitution — if `$HOME` or `$USER` aren't set in the execution environment, the path won't be shortened
 
 ### Hooks don't fire
 - Verify the plugin is enabled: check `enabledPlugins` in `~/.claude/settings.json`
 - Hooks only run in directories with `.beads/` — run `bd init` to create it
 
 ### Permission prompts on every use
-- Add the recommended permissions from Step 4 above to your settings
+- Add the recommended permissions from Step 2 above to your settings

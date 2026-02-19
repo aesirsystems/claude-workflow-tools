@@ -1,15 +1,13 @@
-# claude-workflow-tools
+# claude-breadcrumbs
 
-Claude Code plugin for context preservation across compactions and an enhanced statusline.
+Claude Code plugin for context preservation across compactions. Drop breadcrumbs before `/compact`, pick them up after.
 
 ## What's included
 
 | Component | Type | Description |
 |-----------|------|-------------|
-| `/workflow-tools:prepare-compact` | Skill | Save git state, update beads cards, create recovery files before `/compact` |
-| `/workflow-tools:restore-context` | Skill | Reload everything after compaction or new session |
-| `/workflow-tools:setup-statusline` | Skill | One-time statusline configuration |
-| `statusline.sh` | Script | Rich statusline: model, auth, branch/path, context bar, duration, churn |
+| `/breadcrumbs:prepare-compact` | Skill | Save git state, update beads cards, create recovery files before `/compact` |
+| `/breadcrumbs:restore-context` | Skill | Reload everything after compaction or new session |
 | PreCompact hook | Hook | Auto-saves basic recovery state before compaction |
 | PostCompact hook | Hook | Auto-loads recovery state after compaction |
 
@@ -17,37 +15,32 @@ Claude Code plugin for context preservation across compactions and an enhanced s
 
 ```
 /plugin marketplace add aesirsystems/claude-marketplace
-/plugin install workflow-tools@aesir-marketplace
+/plugin install breadcrumbs@aesir-marketplace
 ```
 
-## Setup
+## Usage
 
-After installing, run the setup skill to configure the statusline:
-
+Before compacting:
 ```
-/workflow-tools:setup-statusline
-```
-
-## Statusline
-
-Shows at-a-glance session info:
-
-```
-[Opus 4.6 (1M context) 1000k EXT: Sub] main ~3 ▓▓▓░░░░░░░ 28% | 12m30s | +45/-12
+/breadcrumbs:prepare-compact
 ```
 
-- **Model + context size** — what you're running on
-- **Auth** — Sub (subscription) or API
-- **Branch + dirty count** — git state (or `~/path` outside git repos)
-- **Context bar** — green < 50%, yellow 50-79%, red 80%+
-- **Duration** — session time
-- **Churn** — lines added/removed
-- **`/compact` warning** — flashes at 85%+
+After compacting or starting a new session:
+```
+/breadcrumbs:restore-context
+```
+
+The hooks also run automatically — PreCompact saves a basic recovery file, PostCompact loads it into context.
 
 ## Dependencies
 
-- [jq](https://jqlang.github.io/jq/) — for parsing statusline JSON (install: `brew install jq`)
 - [beads](https://github.com/steveyegge/beads) — optional, for task tracking features (install: `brew install steveyegge/beads/bd`)
+
+Without beads, the skills still save/restore git state and recovery files.
+
+## See also
+
+- [claude-statusline](https://github.com/aesirsystems/claude-statusline) — enhanced statusline for Claude Code
 
 ## License
 

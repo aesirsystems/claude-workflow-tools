@@ -1,15 +1,15 @@
 {
-  "name": "workflow-tools",
+  "name": "breadcrumbs",
   "version": "1.0.0",
-  "description": "Context preservation (prepare-compact, restore-context) and enhanced statusline for Claude Code",
+  "description": "Context preservation across compactions for Claude Code. Save and restore session state, beads tasks, and strategic recovery files.",
   "author": {
     "name": "Aaron Lippold",
     "email": "lippold@gmail.com",
     "url": "https://github.com/aaronlippold"
   },
-  "homepage": "https://github.com/aesirsystems/claude-workflow-tools",
-  "repository": "https://github.com/aesirsystems/claude-workflow-tools",
+  "homepage": "https://github.com/aesirsystems/claude-breadcrumbs",
+  "repository": "https://github.com/aesirsystems/claude-breadcrumbs",
   "license": "MIT",
-  "keywords": ["context", "compact", "statusline", "workflow", "recovery"],
+  "keywords": ["context", "compact", "recovery", "breadcrumbs", "beads"],
   "hooks": "./hooks/hooks.json"
 }
