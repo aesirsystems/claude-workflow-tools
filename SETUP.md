@@ -21,19 +21,13 @@
 
 ## Installation
 
-### Step 1: Add the marketplace
+### Step 1: Install the plugin
 
 ```
-/plugin marketplace add aesirsystems/claude-workflow-tools
+/plugin install aesirsystems/claude-workflow-tools
 ```
 
-### Step 2: Install the plugin
-
-```
-/plugin install workflow-tools@aesir-marketplace
-```
-
-### Step 3: Configure the statusline
+### Step 2: Configure the statusline
 
 Run the setup skill:
 
@@ -47,13 +41,13 @@ Or manually add to `~/.claude/settings.json`:
 {
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/plugins/cache/workflow-tools@aesir-marketplace/bin/statusline.sh",
+    "command": "~/.claude/plugins/cache/workflow-tools@aesirsystems/claude-workflow-tools/bin/statusline.sh",
     "padding": 0
   }
 }
 ```
 
-### Step 4: Add recommended permissions
+### Step 3: Add recommended permissions
 
 The skills request permissions at runtime, but for a smoother experience add these to `~/.claude/settings.json` under `permissions.allow`:
 
@@ -124,13 +118,13 @@ Recovery files are written to `.beads/` if it exists, otherwise to the project r
 ## Updating
 
 ```
-/plugin update workflow-tools@aesir-marketplace
+/plugin update workflow-tools@aesirsystems/claude-workflow-tools
 ```
 
 ## Uninstalling
 
 ```
-/plugin uninstall workflow-tools@aesir-marketplace
+/plugin uninstall workflow-tools@aesirsystems/claude-workflow-tools
 ```
 
 Remove the `statusLine` entry from `~/.claude/settings.json` if you added it manually.
@@ -139,8 +133,8 @@ Remove the `statusLine` entry from `~/.claude/settings.json` if you added it man
 
 ### Statusline shows nothing
 - Check jq is installed: `which jq`
-- Check the script is executable: `ls -la ~/.claude/plugins/cache/workflow-tools@aesir-marketplace/bin/statusline.sh`
-- Run manually to test: `echo '{}' | ~/.claude/plugins/cache/workflow-tools@aesir-marketplace/bin/statusline.sh`
+- Check the script is executable: `ls -la ~/.claude/plugins/cache/workflow-tools@aesirsystems/claude-workflow-tools/bin/statusline.sh`
+- Run manually to test: `echo '{}' | ~/.claude/plugins/cache/workflow-tools@aesirsystems/claude-workflow-tools/bin/statusline.sh`
 
 ### Statusline shows full path instead of ~/...
 - Verify `$HOME` is set in your shell: `echo $HOME`

@@ -1,9 +1,0 @@
-{
-  "name": "aesir-marketplace",
-  "plugins": [
-    {
-      "name": "workflow-tools",
-      "source": "aesirsystems/claude-workflow-tools"
-    }
-  ]
-}
