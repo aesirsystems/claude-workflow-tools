@@ -1,0 +1,15 @@
+{
+  "name": "workflow-tools",
+  "version": "1.0.0",
+  "description": "Context preservation (prepare-compact, restore-context) and enhanced statusline for Claude Code",
+  "author": {
+    "name": "Aaron Lippold",
+    "email": "lippold@gmail.com",
+    "url": "https://github.com/aaronlippold"
+  },
+  "homepage": "https://github.com/aesirsystems/claude-workflow-tools",
+  "repository": "https://github.com/aesirsystems/claude-workflow-tools",
+  "license": "MIT",
+  "keywords": ["context", "compact", "statusline", "workflow", "recovery"],
+  "hooks": "./hooks/hooks.json"
+}
